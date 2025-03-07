@@ -1,4 +1,7 @@
 # GEI_CIIE
+![GitHub](https://img.shields.io/github/license/ennanco/GEI_CIIE?style=flat-square) ![Python](https://img.shields.io/badge/Python-3.8-blue?logo=Python)
+
+![Banner](img/Banner_CIIE.png)
 
 Repositorio con los ejemplos de PyGame utilizados en la asignatura "Contornos Inmersivos Interactivos y de Entretenimiento" de la Universidade da Coruña.
 
