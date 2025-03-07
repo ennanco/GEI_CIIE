@@ -93,6 +93,18 @@ Una implementación progresiva del clásico juego Pong, que muestra diferentes c
 17. `17 - orientacion a objetos.py`: Refactorización usando programación orientada a objetos
 18. `18 - con sprites.py`: Implementación usando el sistema de sprites de PyGame
 
+#### 2. Sprites
+Una serie de ejemplos que muestran el uso de sprites y animaciones en PyGame:
+
+1. `1 - toda la imagen como Sprite.py`: Ejemplo básico de creación de un sprite
+2. `2 - sprite animado.py`: Implementación de animación básica de sprites
+3. `3 - sprite se mueve mas despacio.py`: Control de velocidad del sprite
+4. `4 - mirando hacia los dos lados.py`: Control de dirección y orientación del sprite
+5. `5 - con grupos.py`: Uso de grupos de sprites para gestión eficiente
+6. `6 - con postura de estar quieto y movimiento medido.py`: Estados y transiciones de animación
+7. `7 - con saltos.py`: Implementación de mecánicas de salto
+8. `8 - con gestor de recursos.py`: Sistema de gestión de recursos para sprites y animaciones
+
 ## Uso
 
 Una vez configurado el entorno virtual y instaladas las dependencias, puedes ejecutar los ejemplos individuales siguiendo las instrucciones específicas de cada uno.
