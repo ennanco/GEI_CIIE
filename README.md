@@ -108,6 +108,38 @@ Una serie de ejemplos que muestran el uso de sprites y animaciones en PyGame:
 7. `7 - con saltos.py`: Implementación de mecánicas de salto
 8. `8 - con gestor de recursos.py`: Sistema de gestión de recursos para sprites y animaciones
 
+#### 3. Plataformas
+Ejemplos de juegos de plataformas que muestran diferentes aspectos de la programación de juegos:
+
+##### 3.1 Plataformas (Un jugador)
+Un juego de plataformas básico que muestra la implementación de:
+- Sistema de física básica (gravedad, saltos)
+- Colisiones con plataformas
+- Animaciones de personaje
+- Gestión de recursos
+- Estructura modular del código
+
+Archivos principales:
+- `main.py`: Punto de entrada del juego
+- `configuracion.py`: Configuraciones globales
+- `recursos.py`: Gestión de recursos (imágenes, sonidos)
+- `personajes.py`: Lógica de los personajes
+- `fase.py`: Gestión del nivel y plataformas
+
+##### 3.2 Plataformas (Dos jugadores)
+Versión extendida del juego de plataformas que añade:
+- Control de dos jugadores simultáneos
+- Interacción entre jugadores
+- Sistema de colisiones mejorado
+- Gestión de recursos compartidos
+
+Archivos principales:
+- `main.py`: Punto de entrada del juego
+- `configuracion.py`: Configuraciones globales
+- `recursos.py`: Gestión de recursos (imágenes, sonidos)
+- `personajes.py`: Lógica de los personajes
+- `fase.py`: Gestión del nivel y plataformas
+
 ## Uso
 
 Una vez configurado el entorno virtual y instaladas las dependencias, puedes ejecutar los ejemplos individuales siguiendo las instrucciones específicas de cada uno.
