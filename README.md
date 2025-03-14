@@ -156,6 +156,25 @@ Archivos principales:
 - `escena.py`: Interface declarativo para cualquier escena
 - `director.py`: Clase que implementa el patrón director
 
+##### 3.4 Manú inicial
+Versión extendida del juego de plataformas que añade:
+- Añadir todos los elementos para la creación de GUI
+- Patrón Plantilla en los elementos que heredan de ElementoGUI
+- Patrón Strategy para cada uno de los elementos la acción a desarrollar
+- Patrón Fachada en los menús donde delegan todos los elementosGUI
+- Patrón Composite ya que todos los elementosGUI saben el Panel al que pertenecen y quien delega las funciones
+
+Archivos principales:
+- `main.py`: Punto de entrada del juego
+- `configuracion.py`: Configuraciones globales
+- `recursos.py`: Gestión de recursos (imágenes, sonidos)
+- `personajes.py`: Lógica de los personajes
+- `fase.py`: Gestión del nivel y plataformas
+- `escena.py`: Interface declarativo para cualquier escena
+- `director.py`: Implementación del patrón director
+- `menu.py`: Todos los elementos relativos a la creación de menús
+
+
 ## Uso
 
 Una vez configurado el entorno virtual y instaladas las dependencias, puedes ejecutar los ejemplos individuales siguiendo las instrucciones específicas de cada uno.
