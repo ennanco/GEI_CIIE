@@ -140,6 +140,22 @@ Archivos principales:
 - `personajes.py`: Lógica de los personajes
 - `fase.py`: Gestión del nivel y plataformas
 
+##### 3.3 Patron director
+Versión extendida del juego de plataformas que añade:
+- Un controlador de escena basado en colas
+- Modularización de la gestión de los eventos y la pantalla
+- Un sistema de transición de escenas
+- La definición de las escenas
+
+Archivos principales:
+- `main.py`: Punto de entrada del juego
+- `configuracion.py`: Configuraciones globales
+- `recursos.py`: Gestión de recursos (imágenes, sonidos)
+- `personajes.py`: Lógica de los personajes
+- `fase.py`: Gestión del nivel y plataformas
+- `escena.py`: Interface declarativo para cualquier escena
+- `director.py`: Clase que implementa el patrón director
+
 ## Uso
 
 Una vez configurado el entorno virtual y instaladas las dependencias, puedes ejecutar los ejemplos individuales siguiendo las instrucciones específicas de cada uno.
