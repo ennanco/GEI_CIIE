@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-
 import pygame
 import sys
 import os
+import math
 from pygame.locals import *
 from configuracion import Configuracion
 from recursos import GestorRecursos
@@ -285,7 +284,7 @@ class NoJugador(Personaje):
     # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
     # La implementacion por defecto, este metodo deberia de ser implementado en las clases inferiores
     #  mostrando la personalidad de cada enemigo
-    def mover_cpu(self, jugador1):
+    def mover_cpu(self, grupo_jugadores):
         # Por defecto un enemigo no hace nada
         #  (se podria programar, por ejemplo, que disparase al jugador por defecto)
         return
@@ -303,11 +302,16 @@ class Sniper(NoJugador):
 
     # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
     # La implementacion de la inteligencia segun este personaje particular
-    def mover_cpu(self,jugador=None):
+    def mover_cpu(self,grupo_jugadores=None):
 
         # Movemos solo a los enemigos que esten en la pantalla
-        if jugador is not None:
-            if jugador.posicion[0]<self.posicion[0]:
+        if grupo_jugadores is not None:
+            # Se selecciona el enemigo que está más cerca
+            jugador_mas_cercano = min(grupo_jugadores.sprites(),
+                                      key=lambda jugador: math.sqrt((jugador.rect.centerx - self.rect.centerx) ** 2 +
+                                                                   (jugador.rect.centery - self.rect.centery) ** 2))
+            #Se mueve a dicho enemigo hacía el jugador más cercano
+            if if jugador_mas_cercano.rect.centerx < self.rect.centerx:
                 Personaje.mover(self,IZQUIERDA)
             else:
                 Personaje.mover(self,DERECHA)

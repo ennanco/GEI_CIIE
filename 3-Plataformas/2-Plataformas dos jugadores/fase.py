@@ -94,7 +94,7 @@ class Fase:
         # Actualización de la IA de los enemigos
         for enemigo in iter(self.grupoEnemigos):
             if self.camara.inCamera(enemigo):
-                enemigo.mover_cpu(self.jugador1)  # Si está en cámara, persigue al jugador
+                enemigo.mover_cpu(self.grupoJugadores)  # Si está en cámara, persigue al jugador
             else:
                 enemigo.mover_cpu()  # Si está fuera de cámara, es decir no hacer nada QUIETO
 
