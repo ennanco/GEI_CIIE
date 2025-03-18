@@ -175,6 +175,23 @@ Archivos principales:
 - `menu.py`: Todos los elementos relativos a la creación de menús
 
 
+##### 3.5 Manú inicial
+Versión extendida del juego de plataformas que añade:
+- Extender la clase PygAnim para incluir animaciones
+- Incluir una serie de animaciones en el menu y en la fase a modo de ejemplo
+
+Archivos principales:
+- `main.py`: Punto de entrada del juego
+- `configuracion.py`: Configuraciones globales
+- `recursos.py`: Gestión de recursos (imágenes, sonidos)
+- `personajes.py`: Lógica de los personajes
+- `fase.py`: Gestión del nivel y plataformas
+- `escena.py`: Interface declarativo para cualquier escena
+- `director.py`: Implementación del patrón director
+- `menu.py`: Todos los elementos relativos a la creación de menús
+- `animacion.py`: Contine la clase Animation y las subclases que se definen
+- `pyganim`: Implementatión del modulo PygAnim para pygame
+
 ## Uso
 
 Una vez configurado el entorno virtual y instaladas las dependencias, puedes ejecutar los ejemplos individuales siguiendo las instrucciones específicas de cada uno.
