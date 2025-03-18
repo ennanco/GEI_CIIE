@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
-
-import pygame, sys, os
+import pygame
+import sys
+import os
 from pygame.locals import *
-from escena import *
-from gestorRecursos import *
+from configuracion import Configuracion
+from recursos import GestorRecursos
 
-# -------------------------------------------------
-# -------------------------------------------------
+# Obtenemos la configuración (Singleton)
+config = Configuracion()
+
 # Constantes
-# -------------------------------------------------
-# -------------------------------------------------
 
 # Movimientos
 QUIETO = 0
@@ -37,10 +36,9 @@ RETARDO_ANIMACION_SNIPER = 5 # updates que durará cada imagen del personaje
 
 GRAVEDAD = 0.0003 # Píxeles / ms2
 
-# -------------------------------------------------
+
 # -------------------------------------------------
 # Clases de los objetos del juego
-# -------------------------------------------------
 # -------------------------------------------------
 
 
@@ -49,25 +47,24 @@ GRAVEDAD = 0.0003 # Píxeles / ms2
 class MiSprite(pygame.sprite.Sprite):
     "Los Sprites que tendra este juego"
     def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.posicion = (0, 0)
+        super().__init__()
+        self.posicion_global = (0, 0)
         self.velocidad = (0, 0)
-        self.scroll   = (0, 0)
+        self.posicion_pantalla = (0, 0)
 
     def establecerPosicion(self, posicion):
-        self.posicion = posicion
-        self.rect.left = self.posicion[0] - self.scroll[0]
-        self.rect.bottom = self.posicion[1] - self.scroll[1]
+        self.posicion_global = posicion
+        self.rect.left = self.posicion_global[0] - self.posicion_pantalla[0]
+        self.rect.bottom = self.posicion_global[1] - self.posicion_pantalla[1]
 
-    def establecerPosicionPantalla(self, scrollDecorado):
-        self.scroll = scrollDecorado;
-        (scrollx, scrolly) = self.scroll;
-        (posx, posy) = self.posicion;
-        self.rect.left = posx - scrollx;
-        self.rect.bottom = posy - scrolly;
+    def establecerPosicionPantalla(self, posicion_pantalla):
+        self.posicion_pantalla = posicion_pantalla;
+        (posx, posy) = self.posicion_global;
+        self.rect.left = posx - self.posicion_pantalla[0];
+        self.rect.bottom = posy - self.posicion_pantalla[1];
 
     def incrementarPosicion(self, incremento):
-        (posx, posy) = self.posicion
+        (posx, posy) = self.posicion_global 
         (incrementox, incrementoy) = incremento
         self.establecerPosicion((posx+incrementox, posy+incrementoy))
 
@@ -78,6 +75,7 @@ class MiSprite(pygame.sprite.Sprite):
 
 
 
+
 # -------------------------------------------------
 # Clases Personaje
 
@@ -85,19 +83,24 @@ class MiSprite(pygame.sprite.Sprite):
 class Personaje(MiSprite):
     "Cualquier personaje del juego"
 
-    # Parametros pasados al constructor de esta clase:
-    #  Archivo con la hoja de Sprites
-    #  Archivo con las coordenadoas dentro de la hoja
-    #  Numero de imagenes en cada postura
-    #  Velocidad de caminar y de salto
-    #  Retardo para mostrar la animacion del personaje
     def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidadCarrera, velocidadSalto, retardoAnimacion):
-
+        """
+        Inicializa un personaje del juego.
+        
+        Args:
+            archivoImagen: Archivo con la hoja de Sprites
+            archivoCoordenadas: Archivo con las coordenadas dentro de la hoja
+            numImagenes: Numero de imagenes en cada postura
+            velocidadCarrera: Velocidad de caminar
+            velocidadSalto: Velocidad de salto
+            retardoAnimacion: Retardo para mostrar la animacion del personaje
+        """
         # Primero invocamos al constructor de la clase padre
-        MiSprite.__init__(self);
+        super().__init__()
 
         # Se carga la hoja
-        self.hoja = GestorRecursos.CargarImagen(archivoImagen,-1)
+        self.hoja = GestorRecursos.CargarImagen(archivoImagen, -1)
+
         self.hoja = self.hoja.convert_alpha()
         # El movimiento que esta realizando
         self.movimiento = QUIETO
@@ -172,7 +175,7 @@ class Personaje(MiSprite):
 
 
     def update(self, grupoPlataformas, tiempo):
-
+        """Actualiza el estado del personaje"""
         # Las velocidades a las que iba hasta este momento
         (velocidadx, velocidady) = self.velocidad
 
@@ -247,15 +250,14 @@ class Personaje(MiSprite):
         return
 
 
-
 # -------------------------------------------------
 # Clase Jugador
 
 class Jugador(Personaje):
-    "Cualquier personaje del juego"
-    def __init__(self):
+    "Cualquier personaje del juego controlado por un jugador"
+    def __init__(self,imagen, coordenadas):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,'Jugador.png','coordJugador.txt', [6, 12, 6], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
+        super().__init__(imagen, coordenadas, [6, 12, 6], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
 
 
     def mover(self, teclasPulsadas, arriba, abajo, izquierda, derecha):
@@ -277,12 +279,12 @@ class NoJugador(Personaje):
     "El resto de personajes no jugadores"
     def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion):
         # Primero invocamos al constructor de la clase padre con los parametros pasados
-        Personaje.__init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion);
+        super().__init__(archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion);
 
     # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
     # La implementacion por defecto, este metodo deberia de ser implementado en las clases inferiores
     #  mostrando la personalidad de cada enemigo
-    def mover_cpu(self, jugador1, jugador2):
+    def mover_cpu(self, grupo_jugadores):
         # Por defecto un enemigo no hace nada
         #  (se podria programar, por ejemplo, que disparase al jugador por defecto)
         return
@@ -292,25 +294,24 @@ class NoJugador(Personaje):
 
 class Sniper(NoJugador):
     "El enemigo 'Sniper'"
-    def __init__(self):
+    def __init__(self, imagen, coordenadas):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        NoJugador.__init__(self,'Sniper.png','coordSniper.txt', [5, 10, 6], VELOCIDAD_SNIPER, VELOCIDAD_SALTO_SNIPER, RETARDO_ANIMACION_SNIPER);
+        super().__init__(imagen, coordenadas, [5, 10, 6], 
+                          VELOCIDAD_SNIPER, VELOCIDAD_SALTO_SNIPER, 
+                          RETARDO_ANIMACION_SNIPER)
 
     # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
     # La implementacion de la inteligencia segun este personaje particular
-    def mover_cpu(self, jugador1, jugador2):
+    def mover_cpu(self,grupo_jugadores=None):
 
         # Movemos solo a los enemigos que esten en la pantalla
-        if self.rect.left>0 and self.rect.right<ANCHO_PANTALLA and self.rect.bottom>0 and self.rect.top<ALTO_PANTALLA:
-
-            # Por ejemplo, intentara acercarse al jugador mas cercano en el eje x
-            # Miramos cual es el jugador mas cercano
-            if abs(jugador1.posicion[0]-self.posicion[0])<abs(jugador2.posicion[0]-self.posicion[0]):
-                jugadorMasCercano = jugador1
-            else:
-                jugadorMasCercano = jugador2
-            # Y nos movemos andando hacia el
-            if jugadorMasCercano.posicion[0]<self.posicion[0]:
+        if grupo_jugadores is not None:
+            # Se selecciona el enemigo que está más cerca
+            jugador_mas_cercano = min(grupo_jugadores.sprites(),
+                                      key=lambda jugador: math.sqrt((jugador.rect.centerx - self.rect.centerx) ** 2 +
+                                                                   (jugador.rect.centery - self.rect.centery) ** 2))
+            #Se mueve a dicho enemigo hacía el jugador más cercano
+            if if jugador_mas_cercano.rect.centerx < self.rect.centerx:
                 Personaje.mover(self,IZQUIERDA)
             else:
                 Personaje.mover(self,DERECHA)
@@ -318,4 +319,5 @@ class Sniper(NoJugador):
         # Si este personaje no esta en pantalla, no hara nada
         else:
             Personaje.mover(self,QUIETO)
+
 

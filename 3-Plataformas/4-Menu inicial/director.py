@@ -1,26 +1,30 @@
-# -*- encoding: utf-8 -*-
-
 # Modulos
 import pygame
 import sys
-#import escena
+from collections import deque
 from escena import *
 from pygame.locals import *
+import configuracion as cfg
 
-
-class Director():
+class Director:
 
     def __init__(self):
         # Inicializamos la pantalla y el modo grafico
-        self.screen = pygame.display.set_mode((ANCHO_PANTALLA, ALTO_PANTALLA))
-        pygame.display.set_caption("Juego con escenas")
+        self._pantalla = pygame.display.set_mode((cfg.ANCHO_PANTALLA, cfg.ALTO_PANTALLA))
+        pygame.display.set_caption("Ejemplo de Juego controlado por el patrón Director")
         # Pila de escenas
-        self.pila = []
+        self.pila = deque()
         # Flag que nos indica cuando quieren salir de la escena
         self.salir_escena = False
         # Reloj
         self.reloj = pygame.time.Clock()
 
+    @property
+    def pantalla(self):
+        """
+        Devuelve la pantalla del director
+        """
+        return self._pantalla
 
     def bucle(self, escena):
 
@@ -33,7 +37,7 @@ class Director():
         while not self.salir_escena:
 
             # Sincronizar el juego a 60 fps
-            tiempo_pasado = self.reloj.tick(60)
+            tiempo_pasado = self.reloj.tick(cfg.FPS)
 
             # Pasamos los eventos a la escena
             escena.eventos(pygame.event.get())
@@ -42,17 +46,17 @@ class Director():
             escena.update(tiempo_pasado)
 
             # Se dibuja en pantalla
-            escena.draw(self.screen)
+            escena.draw(self.pantalla)
             pygame.display.flip()
 
 
-    def ejecutar(self):
+    def execute(self):
 
         # Mientras haya escenas en la pila, ejecutaremos la de arriba
         while (len(self.pila)>0):
 
             # Se coge la escena a ejecutar como la que este en la cima de la pila
-            escena = self.pila[len(self.pila)-1]
+            escena = self.pila[-1]
 
             # Ejecutamos el bucle de eventos hasta que termine la escena
             self.bucle(escena)
@@ -62,12 +66,14 @@ class Director():
         # Indicamos en el flag que se quiere salir de la escena
         self.salir_escena = True
         # Eliminamos la escena actual de la pila (si la hay)
-        if (len(self.pila)>0):
+        try:
             self.pila.pop()
+        except IndexError:
+            pass # Si no hay escenas en la pila, no se hace nada
 
     def salirPrograma(self):
         # Vaciamos la lista de escenas pendientes
-        self.pila = []
+        self.pila.clear() # Liberar la memoria asociada a la pila
         self.salir_escena = True
 
     def cambiarEscena(self, escena):
