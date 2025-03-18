@@ -296,7 +296,7 @@ class Sniper(NoJugador):
     "El enemigo 'Sniper'"
     def __init__(self, imagen, coordenadas):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        NoJugador.__init__(self, imagen, coordenadas, [5, 10, 6], 
+        super().__init__(imagen, coordenadas, [5, 10, 6], 
                           VELOCIDAD_SNIPER, VELOCIDAD_SALTO_SNIPER, 
                           RETARDO_ANIMACION_SNIPER)
 
