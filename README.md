@@ -156,7 +156,7 @@ Archivos principales:
 - `escena.py`: Interface declarativo para cualquier escena
 - `director.py`: Clase que implementa el patrón director
 
-##### 3.4 Manú inicial
+##### 3.4 Menú inicial
 Versión extendida del juego de plataformas que añade:
 - Añadir todos los elementos para la creación de GUI
 - Patrón Plantilla en los elementos que heredan de ElementoGUI
@@ -175,7 +175,7 @@ Archivos principales:
 - `menu.py`: Todos los elementos relativos a la creación de menús
 
 
-##### 3.5 Manú inicial
+##### 3.5 Animaciones
 Versión extendida del juego de plataformas que añade:
 - Extender la clase PygAnim para incluir animaciones
 - Incluir una serie de animaciones en el menu y en la fase a modo de ejemplo
@@ -191,6 +191,23 @@ Archivos principales:
 - `menu.py`: Todos los elementos relativos a la creación de menús
 - `animacion.py`: Contine la clase Animation y las subclases que se definen
 - `pyganim`: Implementatión del modulo PygAnim para pygame
+
+##### 3.6 Optimizaciones de rendimiento
+Versión optimizada del juego de plataformas que añade:
+- Uso de `__slots__` en las clases de `personajes.py` para optimizar el uso de memoria y mejorar el rendimiento de las instancias de los personajes.
+- Ejemplo práctico de cómo aplicar esta técnica en un proyecto real de PyGame.
+
+Archivos principales:
+- `main.py`: Punto de entrada del juego
+- `configuracion.py`: Configuraciones globales
+- `recursos.py`: Gestión de recursos (imágenes, sonidos)
+- `personajes.py`: Lógica de los personajes optimizada con `__slots__`
+- `fase.py`: Gestión del nivel y plataformas, una optimización con `__slots__`
+- `escena.py`: Interface declarativo para cualquier escena
+- `director.py`: Implementación del patrón director
+- `menu.py`: Todos los elementos relativos a la creación de menús
+- `animacion.py`: Contiene la clase Animation y las subclases que se definen
+- `pyganim`: Implementación del módulo PygAnim para pygame
 
 ## Uso
 
