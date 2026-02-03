@@ -7,7 +7,7 @@ Repositorio con los ejemplos de PyGame utilizados en la asignatura "Contornos In
 
 ## Requisitos Previos
 
-- Python 3.8 o superior
+- Python 3.8-3.12.12 (con python 3.13.11 y 3.14.2 pygame da problemas a la hora de descargar las dependencias)
 - pip (gestor de paquetes de Python)
 - (Opcional) uv (gestor de paquetes alternativo más rápido)
 
@@ -50,7 +50,10 @@ pip install uv
 
 2. Crear y activar el entorno virtual:
 ```bash
-uv venv
+uv venv 
+
+# En caso de que la version de python usada no este entre 3.8-3.12 
+uv venv -p 3.11
 ```
 
 3. Activar el entorno virtual:
