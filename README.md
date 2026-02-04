@@ -7,7 +7,9 @@ Repositorio con los ejemplos de PyGame utilizados en la asignatura "Contornos In
 
 ## Requisitos Previos
 
-- Python 3.8-3.12.12 (con python 3.13.11 y 3.14.2 pygame da problemas a la hora de descargar las dependencias)
+
+- Python 3.8-3.12.12 (actualmente con versiones superiores pygame presenta incompativilidades)
+
 - pip (gestor de paquetes de Python)
 - (Opcional) uv (gestor de paquetes alternativo más rápido)
 
