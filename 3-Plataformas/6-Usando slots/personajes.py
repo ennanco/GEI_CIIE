@@ -338,7 +338,7 @@ class Sniper(NoJugador):
                                       key=lambda jugador: math.sqrt((jugador.rect.centerx - self.rect.centerx) ** 2 +
                                                                    (jugador.rect.centery - self.rect.centery) ** 2))
             #Se mueve a dicho enemigo hacía el jugador más cercano
-            if if jugador_mas_cercano.rect.centerx < self.rect.centerx:
+            if jugador_mas_cercano.rect.centerx < self.rect.centerx:
                 Personaje.mover(self,IZQUIERDA)
             else:
                 Personaje.mover(self,DERECHA)

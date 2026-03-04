@@ -18,9 +18,9 @@ class ElementoGUI:
         self.rect.bottom = posicion[1]
 
     def posicionEnElemento(self, posicion):
-    posicionx, posiciony = posicion
-    # alternativamente se podría usar collideoint pero eso no tendría en cuenta los bordes superior y derecho de la forma.
-    return (self.rect.left <= posicionx <= self.rect.right) and (self.rect.top <= posiciony <= self.rect.bottom)
+        posicionx, posiciony = posicion
+        # alternativamente se podría usar collideoint pero eso no tendría en cuenta los bordes superior y derecho de la forma.
+        return (self.rect.left <= posicionx <= self.rect.right) and (self.rect.top <= posiciony <= self.rect.bottom)
 
     def draw(self):
         raise NotImplemented("Tiene que implementar el metodo dibujar.")

@@ -53,7 +53,7 @@ class Fase(Escena):
         self.jugador2 = Jugador(ARCHIVO_JUGADOR, ARCHIVO_COORD_JUGADOR)
         self.grupoJugadores = pygame.sprite.Group(self.jugador1, self.jugador2)
 
-         Ponemos a los jugadores en sus posiciones iniciales
+        # Ponemos a los jugadores en sus posiciones iniciales
         self.jugador1.establecerPosicion((200, 551))
         self.jugador2.establecerPosicion((400, 551))
         
@@ -174,7 +174,7 @@ class Fase(Escena):
             animacion.draw(self.director.pantalla)
 
 
-     def eventos(self, lista_eventos):
+    def eventos(self, lista_eventos):
         """
         Procesa los eventos de la fase.
         
@@ -191,7 +191,7 @@ class Fase(Escena):
                 self.director.salirPrograma()
 
         # Indicamos la acción a realizar segun la tecla pulsada para cada jugador
-         teclasPulsadas = pygame.key.get_pressed()
+        teclasPulsadas = pygame.key.get_pressed()
         # Jugador 1 usa las flechas
         self.jugador1.mover(teclasPulsadas, K_UP, K_DOWN, K_LEFT, K_RIGHT)
         # Jugador 2 usa WASD
